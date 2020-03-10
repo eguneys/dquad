@@ -1,5 +1,5 @@
-import * as geometry from './geometry';
-import Destructible from './destructible';
+import * as geometry from './dquad/geometry';
+import Destructible from './dquad/destructible';
 
 const { rect, circle } = geometry;
 

@@ -1,6 +1,6 @@
 import { log, ok, is, not, deep_is } from 'testiz/browser';
 
-import * as geometry from '../geometry';
+import * as geometry from '../dquad/geometry';
 
 const { rect, line, circle } = geometry;
 
