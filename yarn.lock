@@ -4771,6 +4771,13 @@ terser@^4.0.0:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
+testiz@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/testiz/-/testiz-1.0.7.tgz#31f1c10529cf0f6d750e7c735c1caf66344e5acf"
+  integrity sha512-fHIzmguuxqj+Xc/o3A1byVi7WuUS+TO3msmRS176LaNnPgbwTVfFZ2FcKccX0AcHqYK93CzOj676+Gu6i2paBw==
+  dependencies:
+    chalk "^2.4.2"
+
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
