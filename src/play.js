@@ -41,10 +41,17 @@ export default function Play(ctx) {
   this.init = () => {
     tiles = new Destructible(bs.x, bs.y, bs.w, bs.h, stateVisible, 6);
 
-    tiles.modifyByCircle(circle(bs.x, bs.y, bs.w * 0.2), stateHidden);
+    //tiles.modifyByCircle(circle(bs.x, bs.y, bs.w * 0.2), stateHidden);
 
-    tiles.modifyByRectangle(rect(bs.x + 400, bs.y + 10, bs.w * 0.5, bs.h * 0.3),
-                            stateHidden);
+    tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.2), stateHidden);
+
+    tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.4, bs.w * 0.1), stateVisible);
+
+    // tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.3), stateVisible);
+
+    // tiles.modifyByCircle(circle(100, 100, 20, 20), stateHidden);
+
+    tiles.modifyByRectangle(rect(bs.x + 400, bs.y + 10, bs.w * 0.5, bs.h * 0.3), stateHidden);
   };
 
   this.update = () => {

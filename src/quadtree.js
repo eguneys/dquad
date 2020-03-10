@@ -24,6 +24,7 @@ export default function QuadTree(x, y, w, h,
   this.updateWithCircle = (tCircle, newData) => {
     if (tCircle.containsRect(rect)) {
       this.foldChildrenToParent(newData);
+      return;
     }
     if (tCircle.intersectsRect(rect) ||
         rect.containsPoint(tCircle.x, tCircle.y)) {
