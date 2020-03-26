@@ -4,6 +4,7 @@ import Events from './events';
 import Graphics from './graphics';
 import Canvas from './canvas';
 import Play from './play';
+import Play2 from './play2';
 
 export function app(element, options) {
 
@@ -20,7 +21,7 @@ export function app(element, options) {
     events
   };
 
-  let play = new Play(ctx);
+  let play = new Play2(ctx);
   play.init(options);
 
   new Loop(delta => {

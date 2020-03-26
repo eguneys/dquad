@@ -46,6 +46,35 @@ export default function QuadTree(x, y, w, h,
     }
   };
 
+
+  this.insertWithRectangle = (tRect, makeInitialData, onUpdateOldData) => {
+    if (tRect.contains(rect)) {
+      this.foldChildrenToParentWithUpdate(onUpdateOldData);
+      return;
+    }
+    if (tRect.intersects(rect) || rect.contains(tRect)) {
+      this.insertChildren(makeInitialData, (child) => {
+        child.insertWithRectangle(tRect, makeInitialData, onUpdateOldData);
+      });
+    }
+  };
+
+  this.insertChildren = (makeInitialData, onChild) => {
+    if (depth > 0) {
+      if (children === null) {
+        createChildrenNew(makeInitialData);
+      }
+      children.forEach(child => {
+        onChild(child);
+      });
+      
+      clearRedundantChildren();
+    } else {
+      foldChildrenToParent(makeInitialData());
+    }
+  };
+
+
   this.traverse = onLeafReached => {
     if (children !== null) {
       children.forEach(child => child.traverse(onLeafReached));
@@ -100,6 +129,11 @@ export default function QuadTree(x, y, w, h,
     data = _data;
   };
 
+  const foldChildrenToParentWithUpdate = this.foldChildrenToParentWithUpdate = (onUpdateOldData) => {
+    children = null;
+    onUpdateOldData(data);
+  };
+
   const createChildren = (newData) => {
     let wh = [
       { w: 0, h: 0 },
@@ -120,6 +154,27 @@ export default function QuadTree(x, y, w, h,
       children.push(newChild);
     }
   };
-  
+
+  const createChildrenNew = (makeNewData) => {
+    let wh = [
+      { w: 0, h: 0 },
+      { w: 1, h: 0 },
+      { w: 0, h: 1 },
+      { w: 1, h: 1 }
+    ];
+    children = [];
+    for (let i = 0; i < 4; i++) {
+      let o = wh[i];
+      let x = rect.x + (rect.width  / 2 * o.w),
+          y = rect.y + (rect.height / 2 * o.h),
+          w = rect.width / 2,
+          h = rect.height / 2;
+
+      let newData = makeNewData();
+      let newChild = new QuadTree(x,y,w,h,
+                                  newData, depth - 1, i);
+      children.push(newChild);
+    }
+  };  
 
 }
