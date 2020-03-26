@@ -1,8 +1,8 @@
 export default function Graphics({ width, height, ctx }) {
 
   this.clear = (color) => {
-    ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = color;
+    ctx.clearRect(0, 0, width, height);
     ctx.fillRect(0, 0, width, height);
   };
 
@@ -12,6 +12,7 @@ export default function Graphics({ width, height, ctx }) {
   };
 
   this.srect2 = (x, y, w, h, color) => {
+    ctx.fillStyle = color;
     ctx.strokeStyle = color;
     ctx.strokeRect(x, y, w, h);
   };

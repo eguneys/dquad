@@ -1,6 +1,9 @@
 import * as geometry from './dquad/geometry';
 import Destructible from './dquad/destructible';
 
+import Generate from './dquad/generate';
+
+
 const { rect, circle } = geometry;
 
 function rgba(r, g, b, a = 1) {
@@ -8,12 +11,12 @@ function rgba(r, g, b, a = 1) {
 }
 
 export default function Play(ctx) {
-  const { canvas, graphics: g } = ctx;
+  const { events, canvas, graphics: g } = ctx;
 
   const { width, height } = canvas;
 
   const
-  black = rgba(0),
+  black = rgba(0, 0, 0, 1),
   blue = rgba(100, 100, 255, 0.5),
   red = rgba(255, 100, 100, 0.5),
   green = rgba(100, 255, 100, 0.5),
@@ -38,23 +41,53 @@ export default function Play(ctx) {
 
   let tiles;
 
-  this.init = () => {
+  let once;
+
+  this.init = ({ generate }) => {
+
+    once = false;
+
     tiles = new Destructible(bs.x, bs.y, bs.w, bs.h, stateVisible, 6);
 
-    //tiles.modifyByCircle(circle(bs.x, bs.y, bs.w * 0.2), stateHidden);
+    if (generate) {
+      
+      let g = new Generate(bs.x, bs.y, bs.w, bs.h);
 
-    tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.2), stateHidden);
 
-    tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.4, bs.w * 0.1), stateVisible);
+      for (let i = 0; i < 100; i++) {
+        let r = g.generate();
+        tiles.modifyByRectangle(r, stateHidden);
+      }
 
-    // tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.3), stateVisible);
 
-    // tiles.modifyByCircle(circle(100, 100, 20, 20), stateHidden);
+    } else {
 
-    tiles.modifyByRectangle(rect(bs.x + 400, bs.y + 10, bs.w * 0.5, bs.h * 0.3), stateHidden);
+      //tiles.modifyByCircle(circle(bs.x, bs.y, bs.w * 0.2), stateHidden);
+      tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.2), stateHidden);
+      tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.4, bs.w * 0.1), stateVisible);
+      // tiles.modifyByCircle(circle(bs.x + bs.w * 0.5, bs.y + bs.h * 0.5, bs.w * 0.3), stateVisible);
+      // tiles.modifyByCircle(circle(100, 100, 20, 20), stateHidden);
+      tiles.modifyByRectangle(rect(bs.x + 400, bs.y + 10, bs.w * 0.5, bs.h * 0.3), stateHidden);
+    }
+  };
+
+  const testRectangle = (x, y) => {
+    tiles.queryWithRectangle(rect(x, y, 10, 10), (state) => {
+      console.log(state);
+    });
+  };
+
+  const handleMouse = () => {
+    const { epos } = events.data;
+
+    if (epos) {
+      testRectangle(epos[0], epos[1]);
+    }
+
   };
 
   this.update = () => {
+    handleMouse();
   };
 
 

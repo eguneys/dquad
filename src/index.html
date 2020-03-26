@@ -25,7 +25,7 @@
          background: #202020;
      }
 
-     #app {
+     #app, #app2 {
          position: relative;
          width: 90%;
          height: 0;
@@ -37,14 +37,19 @@
 <body>
   <section>
     <div id="app"></div>
+  </section>
 
+  <section>
+    <div id="app2"></div>
   </section>
 
   <script>
 
    Tetris(document.getElementById('app'), {});
 
-   // Tetris.Tests();
+   /* Tetris(document.getElementById('app2'), {
+    *   generate: true
+    * }); */
    
   </script>
 

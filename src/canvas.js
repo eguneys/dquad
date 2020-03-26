@@ -11,6 +11,8 @@ export default function Canvas(element) {
   canvas.width = this.width = displayWidth;
   canvas.height = this.height = displayHeight;
 
+  this.bounds = element.getBoundingClientRect();
+
   this.ctx = ctx;
 
 }

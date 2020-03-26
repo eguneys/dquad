@@ -34,6 +34,18 @@ export default function QuadTree(x, y, w, h,
     }
   };
 
+  this.queryWithRectangle = (tRect, fn) => {
+    if (tRect.contains(rect)) {
+      fn(data);
+      return;
+    }
+    if (tRect.intersects(rect) || rect.contains(tRect)) {
+      this.queryChildren(fn, (child) => {
+        child.queryWithRectangle(tRect, fn);
+      });
+    }
+  };
+
   this.traverse = onLeafReached => {
     if (children !== null) {
       children.forEach(child => child.traverse(onLeafReached));
@@ -63,6 +75,20 @@ export default function QuadTree(x, y, w, h,
       
       clearRedundantChildren();
     } else foldChildrenToParent(newData);
+  };
+
+  this.queryChildren = (onLeafReached, onRecurse) => {
+    if (depth > 0) {
+      if (children === null) {
+        onLeafReached(data);
+      } else {
+        children.forEach(child => {
+          onRecurse(child);
+        });
+      }
+    } else {
+      onLeafReached(data);
+    }
   };
 
   const clearRedundantChildren = () => {

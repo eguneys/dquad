@@ -3084,6 +3084,11 @@ loglevel@^1.6.3:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.3.tgz#77f2eb64be55a404c9fd04ad16d57c1d6d6b1280"
   integrity sha512-LoEDv5pgpvWgPF4kNYuIp0qqSJVWak/dML0RY74xlzMZiT9w77teNAwKYKWBTYjlokMirg+o3jBwp+vlLrcfAA==
 
+loopz@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/loopz/-/loopz-1.0.3.tgz#898a19b47f58d6ee98664ba50f2ea2a9ab7aa2a3"
+  integrity sha512-FZ8T/Ty7NreY4mPIp2aL0AxfckQjQMrT/L8yc2cg585ANuaGxjDhmkTG/XVJDssFROfMtOU3pfK2S+HsMO5rzA==
+
 loose-envify@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"

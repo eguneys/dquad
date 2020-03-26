@@ -6,6 +6,10 @@ export default function Destructible(x, y, w, h, state, depth) {
 
   this.traverse = body.traverse;
 
+  this.queryWithRectangle = (r, fn) => {
+    body.queryWithRectangle(r, fn);
+  };
+
   this.modifyByRectangle = (r, newState) => {
     body.updateWithRectangle(r, newState);
   };

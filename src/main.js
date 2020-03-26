@@ -1,3 +1,6 @@
+import Loop from 'loopz';
+
+import Events from './events';
 import Graphics from './graphics';
 import Canvas from './canvas';
 import Play from './play';
@@ -8,14 +11,20 @@ export function app(element, options) {
 
   let graphics = new Graphics(canvas);
 
+  let events = new Events(canvas);
+  events.bindTouch();
+
   let ctx = {
     canvas,
-    graphics
+    graphics,
+    events
   };
 
   let play = new Play(ctx);
-  play.init({});
+  play.init(options);
 
-  play.update();
-  play.render();
+  new Loop(delta => {
+    play.update(delta);
+    play.render();
+  }).start();
 }
